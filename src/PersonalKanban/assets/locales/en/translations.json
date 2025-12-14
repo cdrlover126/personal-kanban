@@ -24,5 +24,8 @@
   "title": "Title",
   "titleRequired": "Title is required",
   "wipLimitEnabled": "WIP Limit Enabled",
-  "wipLimit": "WIP Limit"
+  "wipLimit": "WIP Limit",
+  "export": "Export",
+  "exportJSON": "Export as JSON",
+  "exportCSV": "Export as CSV"
 }

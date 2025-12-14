@@ -15,6 +15,7 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import DeveloperBoardIcon from "@material-ui/icons/DeveloperBoard";
 import InfoIcon from "@material-ui/icons/Info";
 import ListIcon from "@material-ui/icons/List";
+import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 
 const icons = {
   edit: EditIcon,
@@ -29,6 +30,7 @@ const icons = {
   personalKanban: DeveloperBoardIcon,
   info: InfoIcon,
   list: ListIcon,
+  download: CloudDownloadIcon,
 };
 
 type IconButtonProps = MuiIconButtonProps & {

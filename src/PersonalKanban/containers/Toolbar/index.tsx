@@ -21,6 +21,7 @@ import ColumnForm from "PersonalKanban/components/ColumnForm";
 import IconButton from "PersonalKanban/components/IconButton";
 import { Column } from "PersonalKanban/types";
 import { useTheme } from "PersonalKanban/providers/ThemeProvider";
+import StorageService from "PersonalKanban/services/StorageService";
 
 type AddColumnButtonProps = {
   onSubmit: any;
@@ -292,14 +293,66 @@ const useToolbarStyles = makeStyles(() => ({
   },
 }));
 
+type ExportButtonProps = {
+  columns: Column[];
+};
+
+const ExportButton: React.FC<ExportButtonProps> = (props) => {
+  const { columns } = props;
+  const { t } = useTranslation();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleExportJSON = () => {
+    const dataBlob = StorageService.exportToJSON(columns);
+    StorageService.downloadFile(dataBlob, `kanban-board-${new Date().toISOString().slice(0, 10)}.json`, "json");
+    handleClose();
+  };
+
+  const handleExportCSV = () => {
+    const encodedUri = StorageService.exportToCSV(columns);
+    StorageService.downloadFile(encodedUri, `kanban-board-${new Date().toISOString().slice(0, 10)}.csv`, "csv");
+    handleClose();
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'export-menu' : undefined;
+
+  return (
+    <div>
+      <IconButton icon="download" color="primary" onClick={handleClick}>
+        {t("export")}
+      </IconButton>
+      <Menu
+        id={id}
+        anchorEl={anchorEl}
+        keepMounted
+        open={open}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleExportJSON}>{t("exportJSON")}</MenuItem>
+        <MenuItem onClick={handleExportCSV}>{t("exportCSV")}</MenuItem>
+      </Menu>
+    </div>
+  );
+};
+
 type ToolbarProps = {
   clearButtonDisabled?: boolean;
   onNewColumn: any;
   onClearBoard: any;
+  columns: Column[];
 };
 
 const Toolbar: React.FC<ToolbarProps> = (props) => {
-  const { clearButtonDisabled, onNewColumn, onClearBoard } = props;
+  const { clearButtonDisabled, onNewColumn, onClearBoard, columns } = props;
 
   const { t } = useTranslation();
 
@@ -335,6 +388,8 @@ const Toolbar: React.FC<ToolbarProps> = (props) => {
             disabled={clearButtonDisabled}
             onClear={onClearBoard}
           />
+          &nbsp;
+          <ExportButton columns={columns} />
           &nbsp;
           <InfoButton />
           &nbsp;

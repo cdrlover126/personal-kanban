@@ -237,6 +237,7 @@ const KanbanBoardContainer: React.FC<KanbanBoardContainerProps> = (props) => {
         clearButtonDisabled={!columns.length}
         onNewColumn={handleAddColumn}
         onClearBoard={handleClearBoard}
+        columns={columns}
       />
       <div className={classes.toolbar} />
       <Box padding={1}>

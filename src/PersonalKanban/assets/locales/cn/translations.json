@@ -23,6 +23,9 @@
   "submit": "提交",
   "title": "标题",
   "titleRequired": "标题为必填项",
-  "wipLimitEnabled": "启用在制品限制",
-  "wipLimit": "在制品限额"
+  "wipLimitEnabled": "启用WIP限制",
+  "wipLimit": "WIP限制",
+  "export": "导出",
+  "exportJSON": "导出为JSON格式",
+  "exportCSV": "导出为CSV格式"
 }
