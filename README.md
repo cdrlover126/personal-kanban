@@ -190,6 +190,23 @@ The application is registered with service workers and behaves as a progressive 
 
 The application is scaffolded using create-react-app ([CRA](https://create-react-app.dev/docs/getting-started/)) with [Typescript](https://www.typescriptlang.org/) templating. You can clone the [Personal Kanban](https://github.com/nishantpainter/personal-kanban) repository for custom development.
 
+### Node.js Compatibility
+
+This version of Personal Kanban has been updated to support newer Node.js versions. If you encounter any issues with postcss or other dependencies, please use the `--legacy-peer-deps` flag when installing dependencies:
+
+```
+npm install --legacy-peer-deps
+```
+
+For newer Node.js versions (v17+), you may also need to set the `NODE_OPTIONS` environment variable when building or running the application:
+
+```
+NODE_OPTIONS=--openssl-legacy-provider npm run build
+NODE_OPTIONS=--openssl-legacy-provider npm start
+```
+
+### Running Locally
+
 To run the application locally on your machine you can follow the steps below :
 
 - Using npm
@@ -197,8 +214,8 @@ To run the application locally on your machine you can follow the steps below :
 ```
 1: git clone https://github.com/nishantpainter/personal-kanban.git
 2: cd personal-kanban
-3: npm install
-4: npm run build
+3: npm install --legacy-peer-deps
+4: NODE_OPTIONS=--openssl-legacy-provider npm run build
 5: sudo npm install -g serve
 6: serve -s build
 ```
@@ -208,8 +225,8 @@ To run the application locally on your machine you can follow the steps below :
 ```
 1: git clone https://github.com/nishantpainter/personal-kanban.git
 2: cd personal-kanban
-3: yarn install
-4: yarn build
+3: yarn install --legacy-peer-deps
+4: NODE_OPTIONS=--openssl-legacy-provider yarn build
 5: sudo npm install -g serve
 6: serve -s build
 ```
